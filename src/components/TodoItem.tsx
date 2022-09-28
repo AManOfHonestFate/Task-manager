@@ -1,26 +1,28 @@
-import {useState} from "react";
+import TodoTable from "./TodoTable";
+import TodoSingle from "./TodoSingle"
 
-interface TodoItemProps {
-    children: JSX.Element | string
+interface TodoSingle {
+    type: 'single',
+    content: string
 }
 
-export default function TodoItem({ children } : TodoItemProps) {
-    const [isDone, setIsDone] = useState(false);
+interface TodoTable {
+    type: 'table',
+    content: string[],
+    title: string
+}
 
-    function setDone() {
-        setIsDone(!isDone);
+type TodoItemTypes = TodoTable | TodoSingle;
+
+export default function TodoItem(item: TodoItemTypes) {
+    switch (item.type) {
+        case "single":
+            return (
+                <TodoSingle>{ item.content }</TodoSingle>
+            )
+        case "table":
+            return (
+                <TodoTable title={item.title}>{ item.content }</TodoTable>
+            )
     }
-
-    return (
-        <div className={
-            `max-w-sm py-2 px-3 border-2 rounded-xl cursor-pointer text-lg
-            ${isDone ? "text-tertiary border-tertiary line-through" : "text-primary border-primary hover:text-secondary hover:border-secondary"}`
-        }
-             onClick={setDone}
-        >
-            <span className="text-primary">
-                { children }
-            </span>
-        </div>
-    )
 }
