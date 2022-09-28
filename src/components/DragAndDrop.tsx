@@ -1,4 +1,4 @@
-import {useState, MouseEvent, useRef, useEffect} from "react";
+import {useState, useRef, useEffect} from "react";
 
 interface DragAndDropProps {
     children: JSX.Element,
@@ -25,7 +25,7 @@ export default function DragAndDrop({ children, className }: DragAndDropProps) {
         setPosition({x: e.clientX - elSize.current.width / 2, y: e.clientY - elSize.current.height / 2});
     }
 
-    function handleMove(e: MouseEvent) {
+    function handleMove() {
         if (mouseState !== 'down') return;
 
         setMouseState('dragged')
@@ -45,11 +45,11 @@ export default function DragAndDrop({ children, className }: DragAndDropProps) {
     return (
         <span
             ref={el}
-            className={mouseState === 'dragged' ? 'absolute' : '' + className ?? ''}
+            className={`w-fit h-fit ${mouseState === 'dragged' ? 'absolute' : ''} ${className ?? ''}`}
             style={{top:  position.y  + 'px', left: position.x + 'px'}}
             onMouseDown={handleMouseDown}
             onMouseUp={handleMouseUp}
-            onMouseMove={(e) => handleMove(e)}
+            onMouseMove={handleMove}
         >
             { children }
         </span>
