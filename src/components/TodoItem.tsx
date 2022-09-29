@@ -3,12 +3,12 @@ import TodoSingle from "./TodoSingle"
 
 interface TodoSingle {
     type: 'single',
-    children: string
+    content: string
 }
 
 interface TodoTable {
     type: 'table',
-    children: string[],
+    content: string[],
     title: string
 }
 
@@ -18,11 +18,11 @@ export default function TodoItem(item: TodoItemTypes) {
     switch (item.type) {
         case "single":
             return (
-                <TodoSingle>{ item.children }</TodoSingle>
+                <TodoSingle>{ item.content }</TodoSingle>
             )
         case "table":
             return (
-                <TodoTable title={item.title}>{ item.children }</TodoTable>
+                <TodoTable title={item.title}>{ item.content }</TodoTable>
             )
     }
 }
