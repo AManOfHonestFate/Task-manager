@@ -13,7 +13,7 @@ export default function TodoItem({ children } : TodoItemProps) {
 
     return (
         <div className={
-            `max-w-sm py-2 px-3 border-2 rounded-xl cursor-pointer text-lg
+            `max-w-sm py-2 px-3 border-2 rounded-xl cursor-pointer text-lg select-none
             ${isDone ? "text-tertiary border-tertiary line-through" : "text-primary border-primary hover:text-secondary hover:border-secondary"}`
         }
              onClick={setDone}
