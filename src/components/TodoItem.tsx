@@ -1,18 +1,6 @@
 import TodoTable from "./TodoTable";
 import TodoSingle from "./TodoSingle"
-
-interface TodoSingle {
-    type: 'single',
-    content: string
-}
-
-interface TodoTable {
-    type: 'table',
-    content: string[],
-    title: string
-}
-
-type TodoItemTypes = TodoTable | TodoSingle;
+import TodoItemTypes from "../types/TodoTypes";
 
 export default function TodoItem(item: TodoItemTypes) {
     switch (item.type) {
