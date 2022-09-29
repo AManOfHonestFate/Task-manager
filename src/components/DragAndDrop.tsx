@@ -12,24 +12,34 @@ export default function DragAndDrop({ children, className }: DragAndDropProps) {
     const [position, setPosition] = useState({x: 0, y: 0});
 
     const el = useRef<HTMLSpanElement>(null);
-    const elSize = useRef({width: 0, height: 0});
+    const elPosition = useRef({x: 0, y: 0});
 
     useEffect(() => {
         if (!el.current) return;
 
-        elSize.current.height = parseFloat(window.getComputedStyle(el.current).height);
-        elSize.current.width = parseFloat(window.getComputedStyle(el.current).width);
-    }, [el.current])
+        elPosition.current.x = el.current.getBoundingClientRect().left +
+            parseFloat(window.getComputedStyle(el.current).width) / 2;
+        elPosition.current.y = el.current.getBoundingClientRect().top +
+            parseFloat(window.getComputedStyle(el.current).height) / 2;
+    }, [children])
 
     function mouseMoveListener (e: globalThis.MouseEvent) {
-        setPosition({x: e.clientX - elSize.current.width / 2, y: e.clientY - elSize.current.height / 2});
+        setPosition({x: e.clientX - elPosition.current.x, y: e.clientY - elPosition.current.y});
+    }
+
+    function mouseUpListener() {
+        window.removeEventListener('mousemove', mouseMoveListener);
+        window.removeEventListener('mouseup', mouseUpListener);
+
+        handleMouseUp();
     }
 
     function handleMove() {
         if (mouseState !== 'down') return;
 
-        setMouseState('dragged')
+        setMouseState('dragged');
         window.addEventListener('mousemove', mouseMoveListener);
+        window.addEventListener('mouseup', mouseUpListener);
     }
 
     function handleMouseDown() {
@@ -37,7 +47,6 @@ export default function DragAndDrop({ children, className }: DragAndDropProps) {
     }
 
     function handleMouseUp() {
-        window.removeEventListener('mousemove', mouseMoveListener);
         setMouseState('none');
         setPosition({x: 0, y: 0});
     }
@@ -45,11 +54,15 @@ export default function DragAndDrop({ children, className }: DragAndDropProps) {
     return (
         <span
             ref={el}
-            className={`w-fit h-fit ${mouseState === 'dragged' ? 'absolute' : ''} ${className ?? ''}`}
-            style={{top:  position.y  + 'px', left: position.x + 'px'}}
+            className={`
+            w-slot h-slot flex flex-col justify-center ${className ?? ''}
+            `}
+            style={ mouseState === 'dragged' ?
+                {transform: `translate(${position.x}px, ${position.y}px)`, pointerEvents: 'none'}
+                : {}}
             onMouseDown={handleMouseDown}
-            onMouseUp={handleMouseUp}
             onMouseMove={handleMove}
+            onMouseUp={handleMouseUp}
         >
             { children }
         </span>
