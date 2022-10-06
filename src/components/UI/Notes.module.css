@@ -2,7 +2,7 @@
 
 .paper {
     -webkit-backface-visibility: hidden;
-    @apply py-4 px-1 text-2xl text-black absolute top-8 right-8 flex -rotate-6;
+    @apply py-4 px-1 text-3xl text-white fixed top-8 right-8 flex -rotate-6;
 
     --dark-bg: #db2777;
     --light-bg: #f472b6;
@@ -10,8 +10,8 @@
 
     border: 1px solid var(--dark-bg);
     font-family: "Caveat", cursive;
-    min-width: 300px;
-    min-height: 150px;
+    width: 300px;
+    height: 175px;
     background: linear-gradient(
             to bottom right,
             var(--dark-bg), 45%,
@@ -20,10 +20,6 @@
             2px 2px 3px var(--light-bg),
             4px 4px 2px var(--light-bg),
             4px 4px 0 1px var(--dark-bg);
-}
-
-.paper p {
-    margin: auto;
 }
 
 .pin {

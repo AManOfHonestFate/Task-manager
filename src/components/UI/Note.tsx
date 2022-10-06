@@ -12,7 +12,7 @@ export default function Note({ children }: NoteProps) {
                 <div className={styles.metal}></div>
                 <div className={styles.head}></div>
             </div>
-            <p>{ children }</p>
+            <p className="block overflow-hidden">{ children }</p>
         </div>
     )
 }
