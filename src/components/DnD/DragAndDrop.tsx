@@ -1,11 +1,12 @@
-import {useState, useRef, useEffect} from "react";
+import {useState, useRef, useEffect, Dispatch, SetStateAction} from "react";
 
 interface DragAndDropProps {
-    children: JSX.Element
+    children: JSX.Element,
+    position: {x: number, y: number},
+    setPosition: Dispatch<SetStateAction<{x: number, y: number}>>
 }
 
-export default function DragAndDrop({ children }: DragAndDropProps) {
-    const [position, setPosition] = useState({x: null as number | null, y: null as number | null});
+export default function DragAndDrop({ children, position, setPosition }: DragAndDropProps) {
 
     const el = useRef<HTMLSpanElement>(null);
     const elPosition = useRef({x: 0, y: 0});
@@ -20,10 +21,8 @@ export default function DragAndDrop({ children }: DragAndDropProps) {
     useEffect(() => {
         if (!el.current) return;
 
-        elPosition.current.x = el.current.getBoundingClientRect().left +
-            parseFloat(window.getComputedStyle(el.current).width) / 2;
-        elPosition.current.y = el.current.getBoundingClientRect().top +
-            parseFloat(window.getComputedStyle(el.current).height) / 2;
+        elPosition.current.x = parseFloat(window.getComputedStyle(el.current).width) / 2;
+        elPosition.current.y = parseFloat(window.getComputedStyle(el.current).height) / 2;
 
         window.addEventListener('mousemove', handleMove);
         return () => window.removeEventListener('mousemove', handleMove);
@@ -32,8 +31,7 @@ export default function DragAndDrop({ children }: DragAndDropProps) {
     return (
         <span
             ref={el}
-            className={`absolute w-slot flex flex-col justify-center pointer-events-none 
-            ${position.x === null ? 'invisible': ''}`}
+            className="absolute w-slot flex flex-col justify-center pointer-events-none transition-transform duration-75"
             style={{transform: `translate(${position.x}px, ${position.y}px)`}}
         >
             { children }
