@@ -1,10 +1,10 @@
-import TodoMiniItem from './TodoMiniItem'
+import TodoMiniItem from './TaskMiniItem'
 interface TodoTableProps {
     title: string,
     children: string[]
 }
 
-export default function TodoTable({ title, children } : TodoTableProps) {
+export default function TaskTable({ title, children } : TodoTableProps) {
 
     return (
         <div className="py-2 px-3 m-1 border-2 border-primary rounded cursor-pointer select-none">

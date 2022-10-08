@@ -1,8 +1,8 @@
-import TodoTable from "./TodoTable";
-import TodoSingle from "./TodoSingle"
+import TaskTable from "./TaskTable";
+import TodoSingle from "./TaskSingle"
 import TodoItemTypes from "../../types/TodoTypes";
 
-export default function TodoItem(item: TodoItemTypes) {
+export default function TaskItem(item: TodoItemTypes) {
     switch (item.type) {
         case "single":
             return (
@@ -10,7 +10,7 @@ export default function TodoItem(item: TodoItemTypes) {
             )
         case "table":
             return (
-                <TodoTable title={item.title}>{ item.content }</TodoTable>
+                <TaskTable title={item.title}>{ item.content }</TaskTable>
             )
     }
 }
