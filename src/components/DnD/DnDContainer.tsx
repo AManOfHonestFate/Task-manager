@@ -2,48 +2,20 @@ import TodoItem from "../TodoItems/TodoItem";
 import DnDSlot from "./DnDSlot";
 import {useEffect, useState, MouseEvent} from "react";
 import {DragInfo} from "./DragTypes"
-import TodoItemTypes from "../../types/TodoTypes";
 import DragAndDrop from "./DragAndDrop";
+import TodoItemTypes from "../../types/TodoTypes";
+import {NumberOrNull} from "../../types/GeneralTypes";
 
-const props = ['Todo', 'First todo', 'Small', 'Fourth todo is big', 'Another todo', 'Todo todo', 'Some more todo', 'This todo is very large']
-
-const todos = [
-    {
-        type: 'single',
-        content: 'Single todo item',
-        id: 0
-    },
-    {
-        type: 'table',
-        content: props,
-        title: 'Todo table 1',
-        id: 1
-    },
-    {
-        type: 'table',
-        content: props,
-        title: 'Todo table 2',
-        id: 2
-    }
-] as TodoItemTypes[]
-
-const gridMap = new Array(5) as (number | null)[][];
-for (let i = 0; i < 5; i++) {
-    gridMap[i] = new Array(4);
-    for (let j = 0; j < 4; j++) {
-        gridMap[i][j] = null;
-    }
+interface DnDContainerProps {
+    roadmap: (NumberOrNull)[][],
+    tasks: TodoItemTypes[]
 }
 
-gridMap[0][0] = 0;
-gridMap[2][3] = 1;
-gridMap[1][1] = 2;
-
-export default function DnDContainer() {
+export default function DnDContainer({ roadmap, tasks }: DnDContainerProps) {
     // Info about drag event
     const [dragInfo, setDragInfo] = useState({
-        draggedId: null as number | null,
-        currentPosition: {x: null as number | null, y: null as number | null},
+        draggedId: null,
+        currentPosition: null,
         status: 'none'
     } as DragInfo);
 
@@ -54,19 +26,19 @@ export default function DnDContainer() {
 
     useEffect(() => {
         // if drag event ended and slot's positions are defined
-        if (dragInfo.status === 'dragEnded' && dragInfo.currentPosition.y !== null && dragInfo.currentPosition.x !== null) {
+        if (dragInfo.status === 'dragEnded' && dragInfo.currentPosition !== null) {
             // sets object to default value
-            setDragInfo({draggedId: null, currentPosition: {x: null, y: null}, status: 'none'});
+            setDragInfo({draggedId: null, currentPosition: null, status: 'none'});
             // if slot isn't empty return
-            if (gridMap[dragInfo.currentPosition.y][dragInfo.currentPosition.x] !== null) return;
+            if (roadmap[dragInfo.currentPosition.y][dragInfo.currentPosition.x] !== null) return;
 
             // place DnD element to the new slot
-            gridMap.forEach((row, j) => {
+            roadmap.forEach((row, j) => {
                 row.forEach((el, i) => {
-                    if (el === dragInfo.draggedId) gridMap[j][i] = null;
+                    if (el === dragInfo.draggedId) roadmap[j][i] = null;
                 })
             })
-            gridMap[dragInfo.currentPosition.y][dragInfo.currentPosition.x] = dragInfo.draggedId;
+            roadmap[dragInfo.currentPosition.y][dragInfo.currentPosition.x] = dragInfo.draggedId;
         }
     }, [dragInfo]);
 
@@ -84,7 +56,7 @@ export default function DnDContainer() {
     // Render DnD if dragging
     const DnDElement = dragInfo.status === 'dragging' ? (
             <DragAndDrop position={DnDPosition} setPosition={setDnDPosition}>
-                <TodoItem {...todos[dragInfo.draggedId!]}></TodoItem>
+                <TodoItem {...tasks[dragInfo.draggedId!]}></TodoItem>
             </DragAndDrop>
         )
         : undefined
@@ -95,10 +67,10 @@ export default function DnDContainer() {
             onMouseUp={handleMouseUp}
             onMouseDownCapture={handleMouseDown}
         >
-            {gridMap.map((row, i) => {
+            {roadmap.map((row, i) => {
                 return row.map((el, j) => {
                     if (el !== null) {
-                        const item = todos[el];
+                        const item = tasks[el];
                         // render slot with content
                         return (
                             <DnDSlot
@@ -114,8 +86,8 @@ export default function DnDContainer() {
                     }
 
                     const pos = dragInfo.currentPosition;
-                    const showBlueprint = dragInfo.status === 'dragging' && pos.x === j && pos.y === i;
-                    const content = showBlueprint ? <TodoItem {...todos[dragInfo.draggedId!]}></TodoItem> : undefined;
+                    const showBlueprint = dragInfo.status === 'dragging' && pos?.x === j && pos.y === i;
+                    const content = showBlueprint ? <TodoItem {...tasks[dragInfo.draggedId!]}></TodoItem> : undefined;
                     // Render Blueprint if dragging over empty slot or render empty slot
                     return (
                         <DnDSlot position={{ x: j, y: i }} dragInfo={dragInfo} setDragInfo={setDragInfo} key={`${i}${j}`}>

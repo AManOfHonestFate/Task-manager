@@ -7,8 +7,8 @@ interface DnDSlotProps {
     position: {x: number, y: number}, // Position of this slot in DnDContainer
     dragInfo: DragInfo,
     setDragInfo: SetDragInfo,
-    children?: JSX.Element,           // Element to render
-    id?: number                       // ID of the element
+    children?: JSX.Element,  // Element to render
+    id?: number  // ID of the element
 }
 
 export default function DnDSlot({ position, dragInfo, setDragInfo, children, id }: DnDSlotProps) {
