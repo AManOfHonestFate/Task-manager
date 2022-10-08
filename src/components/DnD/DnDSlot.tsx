@@ -1,5 +1,7 @@
 import {DragInfo, SetDragInfo} from "./DragTypes";
 import AddButton from "../UI/AddButton";
+import {useRecoilState} from "recoil";
+import {CRUDVisible} from "../../recoil/store";
 
 interface DnDSlotProps {
     position: {x: number, y: number}, // Position of this slot in DnDContainer
@@ -11,7 +13,6 @@ interface DnDSlotProps {
 
 export default function DnDSlot({ position, dragInfo, setDragInfo, children, id }: DnDSlotProps) {
     let isMouseDown = false;
-
     // If DnD element is being dragged over this slot...
     // ...sets slot's position as currentPosition
     function handleMouseEnter() {
@@ -22,7 +23,6 @@ export default function DnDSlot({ position, dragInfo, setDragInfo, children, id 
             currentPosition: position
         })
     }
-
     // stars DnD
     function handleMove() {
         if (!isMouseDown) return;
@@ -35,11 +35,11 @@ export default function DnDSlot({ position, dragInfo, setDragInfo, children, id 
             draggedId: id
         });
     }
-
     // show add button === no dragging and empty
     const showAddButton = dragInfo.status === 'none' && id === undefined;
     // render children or AddButton or nothing
-    const content = children ?? (showAddButton ? <AddButton onClick={() => 1}/> : '');
+    const [_isCRUDVisible, setIsCRUDVisible] = useRecoilState(CRUDVisible);
+    const content = children ?? (showAddButton ? <AddButton onClick={() => setIsCRUDVisible(true)}/> : '');
 
     return (
         <div

@@ -1,4 +1,4 @@
-import TodoItem from "../TodoItem";
+import TodoItem from "../TodoItems/TodoItem";
 import DnDSlot from "./DnDSlot";
 import {useEffect, useState, MouseEvent} from "react";
 import {DragInfo} from "./DragTypes"
