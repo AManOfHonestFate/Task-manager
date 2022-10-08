@@ -1,3 +1,5 @@
+export type TodoTypes = 'single' | 'table';
+
 interface TodoItem {
     type: string,
     content: string | string[],
