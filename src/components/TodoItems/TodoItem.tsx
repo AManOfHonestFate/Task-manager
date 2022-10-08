@@ -1,6 +1,6 @@
 import TodoTable from "./TodoTable";
 import TodoSingle from "./TodoSingle"
-import TodoItemTypes from "../types/TodoTypes";
+import TodoItemTypes from "../../types/TodoTypes";
 
 export default function TodoItem(item: TodoItemTypes) {
     switch (item.type) {
