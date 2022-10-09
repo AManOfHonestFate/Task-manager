@@ -6,11 +6,11 @@ export default function TaskItem(item: TodoItemTypes) {
     switch (item.type) {
         case "single":
             return (
-                <TodoSingle>{ item.content }</TodoSingle>
+                <TodoSingle borderStyle={item.borderStyle}>{ item.content }</TodoSingle>
             )
         case "table":
             return (
-                <TaskTable title={item.title}>{ item.content }</TaskTable>
+                <TaskTable borderStyle={item.borderStyle} title={item.title}>{ item.content }</TaskTable>
             )
     }
 }
