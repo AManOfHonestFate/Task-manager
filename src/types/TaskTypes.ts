@@ -1,22 +1,21 @@
-export type TodoTypes = 'single' | 'table';
+export type TaskTypes = 'single' | 'table';
 
-interface TodoItem {
+interface TaskItem {
     type: string,
     content: string | string[],
     id: number
 }
 
-interface TodoSingle extends TodoItem {
+export interface TaskSingle extends TaskItem {
     type: 'single',
     content: string
 }
 
-interface TodoTable extends TodoItem{
+export interface TaskTable extends TaskItem{
     type: 'table',
     content: string[],
     title: string
 }
 
-type TodoItemTypes = TodoTable | TodoSingle;
-
+type TodoItemTypes = TaskTable | TaskSingle;
 export default TodoItemTypes;
