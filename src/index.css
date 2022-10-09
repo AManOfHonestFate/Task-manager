@@ -4,11 +4,11 @@
 
 @layer components {
   .btn-add {
-    --t: 1rem; /* the thickness */
+    --t: 0.5rem; /* the thickness */
     --c: rgb(236 72 153); /* cross color */
-    --b: #242424; /* background color */
+    --b: #202020; /* background color */
 
-    @apply p-16 m-auto aspect-square rounded-full opacity-0 transition-opacity cursor-pointer hover:opacity-100;
+    @apply p-12 m-auto aspect-square rounded-full opacity-0 transition-opacity cursor-pointer hover:opacity-100;
     border: 2rem solid var(--b);
     background:
             conic-gradient(from 90deg at var(--t) var(--t),transparent 90deg,var(--c) 0)
