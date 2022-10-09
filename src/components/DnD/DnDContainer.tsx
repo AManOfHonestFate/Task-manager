@@ -1,9 +1,9 @@
-import TodoItem from "../TodoItems/TodoItem";
+import TaskItem from "../TaskItems/TaskItem";
 import DnDSlot from "./DnDSlot";
 import {useEffect, useState, MouseEvent} from "react";
 import {DragInfo} from "./DragTypes"
 import DragAndDrop from "./DragAndDrop";
-import TodoItemTypes from "../../types/TodoTypes";
+import TodoItemTypes from "../../types/TaskTypes";
 import {NumberOrNull} from "../../types/GeneralTypes";
 
 interface DnDContainerProps {
@@ -56,7 +56,7 @@ export default function DnDContainer({ roadmap, tasks }: DnDContainerProps) {
     // Render DnD if dragging
     const DnDElement = dragInfo.status === 'dragging' ? (
             <DragAndDrop position={DnDPosition} setPosition={setDnDPosition}>
-                <TodoItem {...tasks[dragInfo.draggedId!]}></TodoItem>
+                <TaskItem {...tasks[dragInfo.draggedId!]}></TaskItem>
             </DragAndDrop>
         )
         : undefined
@@ -69,7 +69,7 @@ export default function DnDContainer({ roadmap, tasks }: DnDContainerProps) {
         >
             {roadmap.map((row, i) => {
                 return row.map((el, j) => {
-                    if (el !== null) {
+                    if (el !== null && tasks[el]) {
                         const item = tasks[el];
                         // render slot with content
                         return (
@@ -80,14 +80,14 @@ export default function DnDContainer({ roadmap, tasks }: DnDContainerProps) {
                                 key={`${i}${j}`}
                                 id={item.id}
                             >
-                                <TodoItem {...item}></TodoItem>
+                                <TaskItem {...item}></TaskItem>
                             </DnDSlot>
                         )
                     }
 
                     const pos = dragInfo.currentPosition;
                     const showBlueprint = dragInfo.status === 'dragging' && pos?.x === j && pos.y === i;
-                    const content = showBlueprint ? <TodoItem {...tasks[dragInfo.draggedId!]}></TodoItem> : undefined;
+                    const content = showBlueprint ? <TaskItem {...tasks[dragInfo.draggedId!]}></TaskItem> : undefined;
                     // Render Blueprint if dragging over empty slot or render empty slot
                     return (
                         <DnDSlot position={{ x: j, y: i }} dragInfo={dragInfo} setDragInfo={setDragInfo} key={`${i}${j}`}>
