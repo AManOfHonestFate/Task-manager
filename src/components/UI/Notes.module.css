@@ -2,24 +2,27 @@
 
 .paper {
     -webkit-backface-visibility: hidden;
-    @apply py-4 px-1 text-3xl text-white fixed top-8 right-8 flex -rotate-6;
+    @apply py-4 px-1 text-3xl text-neutral-100 fixed top-8 right-8 flex -rotate-6;
 
-    --dark-bg: #db2777;
-    --light-bg: #f472b6;
-    --shadow: #f472b6;
+    --dark-bg: #3730a3;
+    --light-bg: #4f46e5;
 
     border: 1px solid var(--dark-bg);
+    border-bottom-left-radius: 15px 225px;
+    border-bottom-right-radius: 20px 205px;
+    border-top-left-radius: 28px 125px;
+    border-top-right-radius: 100px 30px;
     font-family: "Caveat", cursive;
     width: 300px;
     height: 175px;
     background: linear-gradient(
             to bottom right,
             var(--dark-bg), 45%,
-            var(--light-bg));
-    box-shadow:
-            2px 2px 3px var(--light-bg),
-            4px 4px 2px var(--light-bg),
-            4px 4px 0 1px var(--dark-bg);
+            var(--light-bg), 87%, var(--dark-bg), 90%, var(--light-bg));
+    /*box-shadow:*/
+    /*        2px 2px 3px var(--light-bg),*/
+    /*        4px 4px 2px var(--light-bg),*/
+    /*        4px 4px 0 1px var(--dark-bg);*/
 }
 
 .pin {
@@ -27,7 +30,7 @@
     --pin-color: #d02627;
     --pin-dark: #9e0608;
     --pin-light: #fc7e7d;
-    --paper-shadow: #9d174d;
+    --paper-shadow: #17329d;
 
     width: 60px;
     height: 50px;
