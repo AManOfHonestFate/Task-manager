@@ -1,21 +1,21 @@
 export type TaskTypes = 'single' | 'table';
-
+// general task interface
 interface TaskItem {
-    type: string,
+    type: TaskTypes,
     content: string | string[],
-    id: number
+    id: number,
+    borderStyle: number
 }
-
+// single task interface
 export interface TaskSingle extends TaskItem {
     type: 'single',
     content: string
 }
-
+// table interface
 export interface TaskTable extends TaskItem{
     type: 'table',
     content: string[],
     title: string
 }
-
-type TodoItemTypes = TaskTable | TaskSingle;
-export default TodoItemTypes;
+// all task variants
+export type TaskItemTypes = TaskTable | TaskSingle;
