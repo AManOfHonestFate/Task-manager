@@ -2,14 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  font-size: 16px;
+}
+
 @layer components {
   .btn-add {
     --t: 0.5rem; /* the thickness */
     --c: rgb(236 72 153); /* cross color */
     --b: #202020; /* background color */
 
-    @apply p-12 m-auto aspect-square rounded-full opacity-0 transition-opacity cursor-pointer hover:opacity-100;
+    @apply p-10 m-auto aspect-square rounded-full opacity-0 transition-opacity duration-300 cursor-pointer hover:opacity-100;
     border: 2rem solid var(--b);
+      border-top-width: 3rem;
+      border-bottom-width: 3rem;
     background:
             conic-gradient(from 90deg at var(--t) var(--t),transparent 90deg,var(--c) 0)
             calc(100% + var(--t)/2) calc(100% + var(--t)/2)/
