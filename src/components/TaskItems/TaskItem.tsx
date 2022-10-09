@@ -1,8 +1,9 @@
 import TaskTable from "./TaskTable";
 import TodoSingle from "./TaskSingle"
-import TodoItemTypes from "../../types/TaskTypes";
-
-export default function TaskItem(item: TodoItemTypes) {
+import {TaskItemTypes} from "../../types/TaskTypes";
+// generalized component...
+//...depends on item's type field returns corresponding component
+export default function TaskItem(item: TaskItemTypes) {
     switch (item.type) {
         case "single":
             return (
