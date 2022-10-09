@@ -7,8 +7,8 @@ interface TodoTableProps {
 export default function TaskTable({ title, children } : TodoTableProps) {
 
     return (
-        <div className="py-2 px-3 m-1 border-2 border-primary rounded cursor-pointer select-none">
-            <h3 className="text-lg mb-2">{ title }</h3>
+        <div className="py-1 px-2 m-1 border-2 border-primary rounded cursor-pointer select-none max-h-full">
+            <h3 className="mb-1">{ title }</h3>
             <span className="flex flex-wrap">
                 {children.map((el, idx) => {
                     return <TodoMiniItem key={idx}>{ el }</TodoMiniItem>
