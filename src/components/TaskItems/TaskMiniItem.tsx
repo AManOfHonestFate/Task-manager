@@ -1,5 +1,5 @@
 import {useState} from "react";
-import borderStyles from "./BorderStyles";
+import borderStyles from "../UI/BorderStyles";
 
 interface TaskMiniProps {
     children: string

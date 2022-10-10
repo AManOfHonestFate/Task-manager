@@ -1,5 +1,5 @@
 import TodoMiniItem from './TaskMiniItem'
-import borderStyles from "./BorderStyles";
+import borderStyles from "../UI/BorderStyles";
 
 interface TaskTableProps {
     title: string,
