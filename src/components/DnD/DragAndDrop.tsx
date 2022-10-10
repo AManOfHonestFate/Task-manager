@@ -34,8 +34,8 @@ export default function DragAndDrop({ children, position, setPosition }: DragAnd
     return (
         <span
             ref={el}
-            className="absolute w-slot flex flex-col justify-center pointer-events-none transition-transform duration-75"
-            style={{transform: `translate(${position.x}px, ${position.y}px)`}}
+            className="absolute w-slot flex flex-col justify-center pointer-events-none"
+            style={{left: `${position.x}px`, top: `${position.y}px`}}
         >
             { children }
         </span>
