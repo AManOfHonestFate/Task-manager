@@ -1,10 +1,11 @@
 import TaskInput from "../UI/TaskInput";
-import TodoItemTypes, {TaskTable} from "../../types/TaskTypes";
+import {TaskItemTypes, TaskTable} from "../../types/TaskTypes";
 import {Dispatch, SetStateAction, useEffect, useState} from "react";
+import TaskMiniInput from "../UI/TaskMiniInput";
 
 interface TaskTableEditorProps {
-    tasks: TodoItemTypes[],
-    setTasks: Dispatch<SetStateAction<TodoItemTypes[]>>,
+    tasks: TaskItemTypes[],
+    setTasks: Dispatch<SetStateAction<TaskItemTypes[]>>,
     modifiedIndex: number,
 }
 
@@ -12,14 +13,16 @@ export default function TaskTableEditor({ tasks, setTasks, modifiedIndex}: TaskT
 
     const modifiedTask = tasks[modifiedIndex] as TaskTable;
     const [title, setTitle] = useState(modifiedTask.title);
+    const [content, setContent] = useState(modifiedTask.content);
 
     useEffect(() => {
         tasks[modifiedIndex] = {
             ...modifiedTask,
-            title
+            title,
+            content
         }
         setTasks([...tasks]);
-    }, [title])
+    }, [title, content])
 
     return (
         <div className="flex flex-col my-auto">
@@ -28,6 +31,10 @@ export default function TaskTableEditor({ tasks, setTasks, modifiedIndex}: TaskT
                 value={title}
                 setValue={setTitle}
             ></TaskInput>
+            <TaskMiniInput
+                value={content}
+                setValue={setContent}
+            ></TaskMiniInput>
         </div>
     )
 }
