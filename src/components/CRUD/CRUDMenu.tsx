@@ -1,34 +1,39 @@
 import ReturnButton from "../UI/ReturnButton";
 import TaskItem from "../TaskItems/TaskItem";
-import {Dispatch, SetStateAction, MouseEvent, useState, useEffect} from "react";
-import TodoItemTypes, {TaskTypes} from "../../types/TaskTypes";
+import {Dispatch, SetStateAction, MouseEvent} from "react";
+import {TaskTypes, TaskItemTypes} from "../../types/TaskTypes";
 import {NumberOrNull} from "../../types/GeneralTypes";
 import TaskTableEditor from "./TaskTableEditor";
 import TaskSingleEditor from "./TaskSingleEditor";
-
+// getting all tasks and current modified element
 interface CRUDMenuProps {
-    tasks: TodoItemTypes[],
-    setTasks: Dispatch<SetStateAction<TodoItemTypes[]>>,
+    tasks: TaskItemTypes[],
+    setTasks: Dispatch<SetStateAction<TaskItemTypes[]>>,
     modifiedIndex: NumberOrNull,
     setModifiedIndex: Dispatch<SetStateAction<NumberOrNull>>
 }
 
 export default function CRUDMenu({ tasks, setTasks, modifiedIndex, setModifiedIndex }: CRUDMenuProps) {
+    // if some element is being modified ...
+    //... show it in this menu, else menu is hidden
     const elIndex = modifiedIndex ?? 0;
 
+    const borderStyle = tasks[elIndex].borderStyle;
     const taskTemplates = [
         {
             type: 'single',
             content: 'Single Task',
             id: tasks[elIndex].id,
+            borderStyle
         },
         {
             type: 'table',
             title: 'table',
             content: ["Task1", "Task2"],
             id: tasks[elIndex].id,
+            borderStyle
         }
-    ] as TodoItemTypes[]
+    ] as TaskItemTypes[]
 
     const editors = {
         'single': <TaskSingleEditor tasks={tasks} setTasks={setTasks} modifiedIndex={elIndex}></TaskSingleEditor>,
@@ -44,8 +49,8 @@ export default function CRUDMenu({ tasks, setTasks, modifiedIndex, setModifiedIn
 
     return (
         <div
-            className="flex flex-col fixed bottom-16 left-4 p-4 box-content w-slot h-[60%] bg-indigo-800/60 rounded-l-xl
-            transition duration-500 backdrop-blur"
+            className="flex flex-col fixed bottom-16 left-4 p-4 box-content w-slot h-[60%] bg-indigo-900/40 rounded-l-xl border-2
+            transition duration-500 backdrop-blur overflow-y-scroll"
             style={modifiedIndex ? {transform: 'translateX(0)', opacity: '1'} : {transform: 'translateX(-100%)', opacity: '0'}}
         >
             <ReturnButton onClick={() => setModifiedIndex(null)}></ReturnButton>
