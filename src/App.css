@@ -1,8 +1,30 @@
 @import url('https://fonts.googleapis.com/css2?family=Kalam:wght@300;400&display=swap');
 
+*::-webkit-scrollbar {
+  width: 8px;               /* ширина scrollbar */
+  height: 8px;
+}
+*::-webkit-scrollbar-track {
+  background: #202020;        /* цвет дорожки */
+}
+*::-webkit-scrollbar-thumb {
+  background-color: #EC4899;    /* цвет плашки */
+  border-radius: 20px;       /* закругления плашки */
+  border: 3px solid transparent;  /* padding вокруг плашки */
+}
+*::-webkit-scrollbar-corner {
+  background-color: #202020;
+}
+body {
+  background-color: #202020;
+  /*scrollbar-width: thin;          !* "auto" или "thin"  *!*/
+  /*scrollbar-color: blue orange*/
+}
+
 #root {
   @apply bg-background;
 
+  width: fit-content;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
