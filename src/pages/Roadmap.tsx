@@ -34,7 +34,7 @@ const todos = [
 const gridMap = new Array(5) as (number | null)[][];
 for (let i = 0; i < 5; i++) {
     gridMap[i] = new Array(4);
-    for (let j = 0; j < 4; j++) {
+    for (let j = 0; j < 6; j++) {
         gridMap[i][j] = null;
     }
 }
