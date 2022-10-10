@@ -3,12 +3,12 @@ import DnDSlot from "./DnDSlot";
 import {useEffect, useState, MouseEvent} from "react";
 import {DragInfo} from "./DragTypes"
 import DragAndDrop from "./DragAndDrop";
-import TodoItemTypes from "../../types/TaskTypes";
+import {TaskItemTypes} from "../../types/TaskTypes";
 import {NumberOrNull} from "../../types/GeneralTypes";
 
 interface DnDContainerProps {
     roadmap: (NumberOrNull)[][],
-    tasks: TodoItemTypes[]
+    tasks: TaskItemTypes[]
 }
 
 export default function DnDContainer({ roadmap, tasks }: DnDContainerProps) {
@@ -63,7 +63,7 @@ export default function DnDContainer({ roadmap, tasks }: DnDContainerProps) {
 
     return (
         <div
-            className={`grid grid-cols-4 grid-rows-5 gap-4`}
+            className={`grid grid-cols-dnd grid-rows-5 gap-4`}
             onMouseUp={handleMouseUp}
             onMouseDownCapture={handleMouseDown}
         >
