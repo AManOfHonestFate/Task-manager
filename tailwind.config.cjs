@@ -18,6 +18,10 @@ module.exports = {
       height: {
         'slot': '166px'
       },
+      gridTemplateColumns: {
+        // Complex site-specific column configuration
+        'dnd': 'repeat(6, 256px)'
+      },
       animation: {
         'slide-right': 'slide 500ms ease 1 forward',
         'slide-left': 'slide 500ms ease 1 reverse backward',
