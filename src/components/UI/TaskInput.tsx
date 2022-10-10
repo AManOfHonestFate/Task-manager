@@ -1,4 +1,5 @@
 import {Dispatch, SetStateAction} from "react";
+import borderStyles from "./BorderStyles";
 
 interface TaskInputProps {
     label: string,
@@ -11,10 +12,12 @@ export default function TaskInput({ label, value, setValue }: TaskInputProps) {
         <label>
             { label }
             <input
-                className="bg-transparent p-2 ml-2 border-b-2"
+                className="bg-transparent p-2 ml-2 border"
+                style={borderStyles.get(2)}
                 type="text"
                 value={value}
                 onChange={(e) => setValue(e.target.value)}
+                onBlur={(e) => e.target.value || setValue('🙂')}
             />
         </label>
     )
