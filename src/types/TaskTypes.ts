@@ -1,6 +1,6 @@
 export type TaskTypes = 'single' | 'table';
 // general task interface
-interface TaskItem {
+export interface TaskItem {
     type: TaskTypes,
     content: string | string[],
     id: number,
