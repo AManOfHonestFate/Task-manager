@@ -1,15 +1,12 @@
-import {MouseEventHandler} from "react";
+import {HTMLAttributes} from "react";
 
-interface ButtonProps {
-    onClick: MouseEventHandler
-}
-
-export default function AddButton({ onClick }: ButtonProps) {
+export default function AddButton({className = '', ...props}: HTMLAttributes<HTMLDivElement>) {
 
     return (
-            <span
-                onClick={onClick}
-                className="btn-add"
-            ></span>
+            <div
+                {...props}
+                className={`m-auto px-10 py-20 rounded-full text-tertiary bg-background
+                    opacity-0 hover:opacity-100 transition-opacity cursor-pointer ` + className}
+            >+</div>
     )
 }
