@@ -80,7 +80,7 @@ export default function DnDContainer({ roadmap, tasks }: DnDContainerProps) {
                                 key={`${i}${j}`}
                                 id={item.id}
                             >
-                                <TaskItem {...item}></TaskItem>
+                                <TaskItem infoButton {...item}></TaskItem>
                             </DnDSlot>
                         )
                     }

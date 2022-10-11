@@ -15,10 +15,13 @@
 *::-webkit-scrollbar-corner {
   background-color: #202020;
 }
+* {
+  scrollbar-width: thin;          /* "auto" или "thin"  */
+  scrollbar-color: #EC4899 #202020;
+}
+
 body {
   background-color: #202020;
-  /*scrollbar-width: thin;          !* "auto" или "thin"  *!*/
-  /*scrollbar-color: blue orange*/
 }
 
 #root {
