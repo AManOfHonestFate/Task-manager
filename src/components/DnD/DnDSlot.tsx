@@ -39,7 +39,7 @@ export default function DnDSlot({ position, dragInfo, setDragInfo, children, id 
     const showAddButton = dragInfo.status === 'none' && id === undefined;
     // render children or AddButton or nothing
     const [_newElement, setNewElement] = useRecoilState(ModifiedElement);
-    const content = children ?? (showAddButton ? <AddButton onClick={
+    const content = children ?? (showAddButton ? <AddButton className="text-[100px]" onClick={
         () => {
             setNewElement(position);
         }
