@@ -1,10 +1,10 @@
 import TaskInput from "../UI/TaskInput";
-import TodoItemTypes, {TaskSingle} from "../../types/TaskTypes";
+import {TaskItemTypes, TaskSingle} from "../../types/TaskTypes";
 import {Dispatch, SetStateAction, useEffect, useState} from "react";
 
 interface TaskSingleEditor {
-    tasks: TodoItemTypes[],
-    setTasks: Dispatch<SetStateAction<TodoItemTypes[]>>,
+    tasks: TaskItemTypes[],
+    setTasks: Dispatch<SetStateAction<TaskItemTypes[]>>,
     modifiedIndex: number,
 }
 
